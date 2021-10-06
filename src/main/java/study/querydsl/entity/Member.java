@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Entity
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString(of = {"id", "username", "age"})
+@ToString(of = {"id", "username", "age"}) //엔티티lv에서 연관관계 필드 team은 넣어주지 않도록 주의.(무한 호출 될 수 있다.)
 public class Member {
     @Id
     @GeneratedValue
@@ -19,6 +19,7 @@ public class Member {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "team_id")
     private Team team;
+
     public Member(String username) {
         this(username, 0);
     }
