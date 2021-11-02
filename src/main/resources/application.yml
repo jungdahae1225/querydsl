@@ -12,6 +12,7 @@ spring:
     hibernate:
       # show_sql: true #system.out으로 출력 아래에서 로거로 출력하는 방법 택해서 둘 중에 하나만 해주면 됨.
       format_sql: true
+      use_sql_comments: true
 
 logging.level:
   org.hibernate.SQL: debug #로거로 출력
