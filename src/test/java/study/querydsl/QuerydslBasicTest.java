@@ -17,8 +17,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 @SpringBootTest
 @Transactional
 public class QuerydslBasicTest {
-    @PersistenceContext
-    EntityManager em;
+    @PersistenceContext EntityManager em;
+
     @BeforeEach
     public void before() {
         Team teamA = new Team("teamA");
@@ -35,27 +35,6 @@ public class QuerydslBasicTest {
         em.persist(member4);
     }
 
-    @Test
-    public void startJPQL() {
-        //member1을 찾아라.
-        String qlString =
-                "select m from Member m " +
-                        "where m.username = :username";
-        Member findMember = em.createQuery(qlString, Member.class)
-                .setParameter("username", "member1")
-                .getSingleResult();
-        assertThat(findMember.getUsername()).isEqualTo("member1");
-    }
-
-    @Test
-    public void search() {
-        Member findMember = queryFactory
-                .selectFrom(member)
-                .where(member.username.eq("member1")
-                        .and(member.age.eq(10)))
-                .fetchOne();
-        assertThat(findMember.getUsername()).isEqualTo("member1");
-    }
 
     //이하 필요할 때 관련 쿼리 자료 찾아서 확인하겠음
 }
